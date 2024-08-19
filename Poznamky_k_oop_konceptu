@@ -119,3 +119,105 @@ else {
 
 --------// ! Public, Priave, Protected? Constants, Read only fields, Constructors, Setters, Getters, Properties and static ------
 
+
+using System;
+
+class Hlavna
+{
+    public static void Main(string[] args)
+    {
+        // Example usage of Animal class
+        Animal animal = new Animal("Dog", "Bark");
+        animal.makeSound();
+        
+        Animal anotherAnimal = new Animal("Cat");
+        anotherAnimal.Sound = "vv";
+        anotherAnimal.makeSound();
+        
+        Console.WriteLine("Number of Animals: " + Animal.numOfAnimals);
+    }
+
+    class Animal
+    {
+        private string Name; // Can only be changed by methods inside the class
+        private string sound; // Private field for sound
+
+        // Readonly field
+        public readonly int idNum;
+
+        // Static field to keep track of the number of Animal instances
+        private static int numOfAnimalsVar = 0;
+
+        // Property to access and modify the static field
+        public static int numOfAnimals
+        {
+            get { return numOfAnimalsVar; }
+            set { numOfAnimalsVar += value; }
+        }
+
+        // Constructor chaining
+        public Animal() : this("No sound", "No name") { }
+
+        public Animal(string name) : this(name, "No sound") { }
+
+        public Animal(string name, string sound)
+        {
+            SetterName(name);
+            Sound = sound; // Using the property to set the sound
+            numOfAnimalsVar++; // Increment the number of Animal instances
+        }
+
+        // Setter to protect the Name field
+        public void SetterName(string name)
+        {
+            this.Name = name;
+        }
+
+        // Getter for the Name field
+        public string GetterName()
+        {
+            return Name;
+        }
+
+        // Property for the Sound field with validation in the setter
+        public string Sound
+        {
+            get { return sound; }
+            set
+            {
+                if (value.Length > 10)
+                {
+                    sound = "No sound";
+                    Console.WriteLine("Too long to be the sound");
+                }
+                else
+                {
+                    sound = value;
+                }
+            }
+        }
+
+        // Auto-implemented property with a default value
+        public string Owner { get; set; } = "No owner";
+
+        // Method to print the animal's sound
+        public void makeSound()
+        {
+            Console.WriteLine("Name: {0}, Sound: {1}", Name, Sound);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
