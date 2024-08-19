@@ -1,0 +1,117 @@
+using System;
+
+class Hlavna
+{
+    public static void Main()
+    {
+        // Initializing rec1 properly
+        Rectangle rec1 = new Rectangle();
+        Rectangle rectangle = new Rectangle(2, 3); // This is the declaring using the constructor
+
+        rec1.length = 2;
+        rec1.width = 2;
+        System.Console.WriteLine("This is the calculated area: {0}", rec1.Area());
+
+        Student stu = new Student(22, "Marko"); // Creating the object of the Student class
+        stu.VypisMa();
+
+        Animal haf = new Animal("Dog", "Woof");
+
+        // Providing the correct number of arguments to the format string
+        Console.WriteLine("This is the result from the counter: {0}", Animal.animCounterOfMethod());
+        // ! vďaka tomu že animCounterOfMethod je static methoda tak stači použiť classname + nameOfTheMethod 
+        haf.makeSound();
+
+        System.Console.WriteLine("This is the result of it {0}", ShapeMath.GetArea("Rectangle",2,2));
+
+    }
+}
+
+struct Rectangle
+{
+    public double length;
+    public double width;
+
+    // Constructor
+    public Rectangle(double a = default, double b = default)
+    {
+        length = a;
+        width = b;
+    }
+
+    public double Area()
+    {
+        return length * width;
+    }
+}
+
+class Animal
+{
+    public string name;
+    public string sound;
+
+    public static int animcounter = 0;
+
+    // Default constructor
+    public Animal()
+    {
+        name = "Unknown";
+        sound = "No sound";
+    }
+
+    // Parameterized constructor
+    public Animal(string meno = "No name", string sound = "No sound")
+    {
+        this.name = meno;
+        this.sound = sound;
+        animcounter++;
+    }
+
+    public void makeSound()
+    {
+        Console.WriteLine("This is the sound: {0}, and the name: {1}", sound, name);
+    }
+
+    public static int animCounterOfMethod()
+    {
+        return animcounter;
+    }
+}
+
+class Student
+{
+    public int id;
+    public string name;
+
+    // Parameterized constructor
+    public Student(int id, string name)
+    {
+        this.id = id;
+        this.name = name;
+    }
+
+    public void VypisMa()
+    {
+        System.Console.WriteLine("Volam sa {0} a moje id je {1}", name, id);
+    }
+}
+
+public static class ShapeMath {
+
+public static double GetArea(string shape = "", double dlzka = 0, double dlzka2 = 0 ){
+
+if(String.Equals("Rectangle",shape)){
+    return dlzka * dlzka2;
+
+}
+else {
+    Console.WriteLine("nice one");
+    return 0;
+}
+
+}
+
+
+
+}
+
